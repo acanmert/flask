@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def secimlik(secim):
     data = pd.read_csv(f'C:\\Users\\AhmetCan\\source\\repos\\File_Upload\\File_Upload\\wwwroot\\dataset\\{secim}', encoding='ISO-8859-9')
-    return data
+    return  data
 
 def create_combined_features(row, selected_features):
     return ' '.join([str(row[feature]) for feature in selected_features])
