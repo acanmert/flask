@@ -1,18 +1,10 @@
-from flask import Flask, request, jsonify
-import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
-app = Flask(__name__)
-
-def secimlik(secim):
-    data = pd.read_csv(f'C:\\Users\\AhmetCan\\source\\repos\\File_Upload\\File_Upload\\wwwroot\\dataset\\{secim}', encoding='"utf-8-sig')
-    return  data
 
 def create_combined_features(row, selected_features):
     return ' '.join([str(row[feature]) for feature in selected_features])
 
-def get_recommendations(title, data, selected_features,p_name,p_type, top_n=10,):
+def get_recommendations_cosine(title, data, selected_features,p_name,p_type, top_n):
     try:
         # Kullanıcının seçtiği özelliklere göre 'combined_features' sütununu oluştur
         data['combined_features'] = data.apply(lambda row: create_combined_features(row, selected_features), axis=1)
@@ -42,17 +34,5 @@ def get_recommendations(title, data, selected_features,p_name,p_type, top_n=10,)
         return [f"Error occurred: {str(e)}"]
 
 
-@app.route('/recommendations', methods=['GET'])
-def get_recommendations_endpoint():
-    secim = request.args.get('secim')
-    data = secimlik(secim)
-    selected_features = request.args.get('selected_features').split(',')
-    title = request.args.get('title')
-    p_name=request.args.get("p_name")
-    p_type=request.args.get("p_type")
-    recommendations = get_recommendations(title, data, selected_features,p_name,p_type)
 
-    return jsonify(recommendations)
 
-if __name__ == '__main__':
-    app.run(debug=True)
