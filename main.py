@@ -38,8 +38,10 @@ def get_recommendations(title, data, selected_features,p_name,p_type, top_n=10,)
         else:
             return ["No recommendation available"]  # veya başka bir hata durumu işleme
     except Exception as e:
-        print(f"Error occurred: {str(e)}")
-        return ["Error occurred while getting recommendations"]
+        #print(f"Error occurred: {str(e)}")
+        return [f"Error occurred: {str(e)}"]
+
+
 @app.route('/recommendations', methods=['GET'])
 def get_recommendations_endpoint():
     secim = request.args.get('secim')
