@@ -4,7 +4,7 @@ from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import LabelEncoder
 
 
-def get_recommendations_knn(title, data, selected_features, p_name, p_type, top_n):
+def get_recommendations_knn(p_name, data, selected_features, p_pk, p_type, top_n):
     try:
         selected_data = data[selected_features]
 
@@ -15,11 +15,11 @@ def get_recommendations_knn(title, data, selected_features, p_name, p_type, top_
 
 
         # Kullanıcının girdisine göre benzer öğeleri bulma
-        if p_name in data.columns:
+        if p_pk in data.columns:
             if p_type == "evet":
-                index = data[data[p_name] == int(title)].index[0]
+                index = data[data[p_pk] == int(p_name)].index[0]
             else:
-                index = data[data[p_name] == title].index[0]
+                index = data[data[p_pk] == p_name].index[0]
             knn_model = NearestNeighbors(n_neighbors=top_n, algorithm='auto', metric='euclidean')
             knn_model.fit(selected_data)
 

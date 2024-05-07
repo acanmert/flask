@@ -15,11 +15,11 @@ def get_recommendations_endpoint():
     secim = request.args.get('secim')
     data = secimlik(secim)
     selected_features = request.args.get('selected_features').split(',')
-    title = request.args.get('title')
-    p_name = request.args.get("p_name")
+    p_name = request.args.get('p_name')
+    p_pk = request.args.get("p_pk")
     p_type = request.args.get("p_type")
-    recommendations =cosine.get_recommendations_cosine(title, data, selected_features,p_name,p_type,data.shape[0])
-    # recommendations =knn.get_recommendations_knn(title, data, selected_features,p_name,p_type,data.shape[0])
+    #  recommendations =cosine.get_recommendations_cosine(p_name, data, selected_features,p_pk,p_type,data.shape[0])
+    recommendations =knn.get_recommendations_knn(p_name, data, selected_features,p_pk,p_type,data.shape[0])
 
 
     return jsonify(recommendations)
