@@ -11,7 +11,7 @@ def get_recommendations_cosine(p_name, data, selected_features,p_pk,p_type, top_
 
         # Kullanıcının girdisine göre film önerilerini al
         if p_pk in data.columns:
-            if p_type == "evet":
+            if p_type == "Evet":
                 index = data[data[p_pk] == int(p_name)].index[0]
             else:
                 index = data[data[p_pk] == p_name].index[0]

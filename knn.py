@@ -16,7 +16,7 @@ def get_recommendations_knn(p_name, data, selected_features, p_pk, p_type, top_n
 
         # Kullanıcının girdisine göre benzer öğeleri bulma
         if p_pk in data.columns:
-            if p_type == "evet":
+            if p_type == "Evet":
                 index = data[data[p_pk] == int(p_name)].index[0]
             else:
                 index = data[data[p_pk] == p_name].index[0]
