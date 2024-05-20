@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import cosine,knn
+import fuzzy
 
 app = Flask(__name__)
 
@@ -18,8 +19,9 @@ def get_recommendations_endpoint():
     p_name = request.args.get('p_name')
     p_pk = request.args.get("p_pk")
     p_type = request.args.get("p_type")
-    #  recommendations =cosine.get_recommendations_cosine(p_name, data, selected_features,p_pk,p_type,data.shape[0])
-    recommendations =knn.get_recommendations_knn(p_name, data, selected_features,p_pk,p_type,data.shape[0])
+    recommendations =cosine.get_recommendations_cosine(p_name, data, selected_features,p_pk,p_type,data.shape[0])
+    #recommendations =knn.get_recommendations_knn(p_name, data, selected_features,p_pk,p_type,5)
+    #recommendations =fuzzy.get_recommendations_fuzzy(p_name, data, selected_features,p_pk,p_type,5)
 
 
     return jsonify(recommendations)
