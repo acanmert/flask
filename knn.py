@@ -20,6 +20,7 @@ def get_recommendations_knn(p_name, data, selected_features, p_pk, p_type, top_n
                 index = data[data[p_pk] == int(p_name)].index[0]
             else:
                 index = data[data[p_pk] == p_name].index[0]
+
             knn_model = NearestNeighbors(n_neighbors=top_n, algorithm='auto', metric='euclidean')
             knn_model.fit(selected_data)
 
@@ -35,7 +36,6 @@ def get_recommendations_knn(p_name, data, selected_features, p_pk, p_type, top_n
             similar_items = []
             for idx, dist in zip(similar_items_indices, distances):
                 similar_item_dict = data.iloc[idx].to_dict()
-                similar_item_dict['distance'] = dist
                 similar_items.append(similar_item_dict)
 
             return similar_items
